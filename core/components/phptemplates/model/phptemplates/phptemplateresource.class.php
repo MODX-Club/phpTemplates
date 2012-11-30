@@ -71,10 +71,16 @@ class phpTemplateResource extends modResource{
 
             $this->xpdo->invokeEvent('OnWebPagePrerender');
             
-            print $this->_content;
+            print $this->_content; 
             
+            /*
+             * Empty data for minimize document cache
+             */
+            $this->content = null;
             $this->_content = null;
-            
+            $this->xpdo->elementCache = null;
+            $this->xpdo->sourceCache = null;
+             
             if ($this->xpdo->getOption('cache_resource', null, true)) {
                 if ($this->get('id') && $this->get('cacheable')) {
                     $this->xpdo->invokeEvent('OnBeforeSaveWebPageCache');

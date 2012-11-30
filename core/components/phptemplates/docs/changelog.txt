@@ -1,12 +1,18 @@
-phpTemplates 1.0.0
+phpTemplates 1.1.0
 ===========================================
 
-1. Added php static templates
-
-2. Added custom resources
+1. Optimized resource cache
 
 
 phpTemplates 1.0.1
 ===========================================
 
 1. Added phptemplates plugin
+
+
+phpTemplates 1.0.0
+===========================================
+
+1. Added php static templates
+
+2. Added custom resources
