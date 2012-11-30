@@ -4,3 +4,9 @@ phpTemplates 1.0.0
 1. Added php static templates
 
 2. Added custom resources
+
+
+phpTemplates 1.0.1
+===========================================
+
+1. Added phptemplates plugin
