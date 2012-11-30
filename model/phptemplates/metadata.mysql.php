@@ -5,17 +5,12 @@
  * Author: proxyfabio
  * Date: 29.11.12
  *
- * @package: PHPTemplates
+ * @package: phpTemplates
  * @subpackage: build
  */
-
 $xpdo_meta_map = array (
     'modResource' =>
     array (
-        0 => 'PHPTemplateResource',
+        0 => 'phpTemplateResource',
     ),
-    /*'xPDOSimpleObject' =>
-    array (
-        0 => 'TicketComment',
-    ),  */
 );
