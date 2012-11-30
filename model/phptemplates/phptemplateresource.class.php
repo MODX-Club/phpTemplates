@@ -22,7 +22,7 @@ class phpTemplateResource extends modResource{
     }
 
     public static function getControllerPath(xPDO &$modx) {
-        return $xpdo->getOption('phptemplates.core_path',null,$xpdo->getOption('core_path').'components/phptemplates/').'controllers/phptemplateresource/';
+        return $modx->getOption('phptemplates.core_path',null,$modx->getOption('core_path').'components/phptemplates/').'controllers/phptemplateresource/';
     }
 
     public function getContextMenuText() {
