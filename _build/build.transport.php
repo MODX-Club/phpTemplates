@@ -16,7 +16,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','phpTemplates');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','1.0.0');
+define('PKG_VERSION','1.0.1');
 define('PKG_RELEASE','beta');
 
 /* define sources */
@@ -73,11 +73,31 @@ $attr = array(
             xPDOTransport::UPDATE_OBJECT => true,
             xPDOTransport::UNIQUE_KEY => 'name',
         ),
+        'Plugins' => array (
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UNIQUE_KEY => 'name',
+        ),
+        'PluginEvents' => array(
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => false,
+            xPDOTransport::UNIQUE_KEY => array('pluginid','event'),
+        ),
     )
 );
 
 
 $vehicle = $builder->createVehicle($category,$attr);
+
+
+$plugins = include $sources['data'].'transport.plugins.php';
+if (!is_array($plugins)) {
+    $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in plugins.');
+} else {
+    $category->addMany($plugins);
+    $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($plugins).' plugins.');
+}
+
 $modx->log(modX::LOG_LEVEL_INFO,'Adding resolvers to category...');
 $vehicle->resolve('file',array(
     'source' => $sources['source_assets'],
