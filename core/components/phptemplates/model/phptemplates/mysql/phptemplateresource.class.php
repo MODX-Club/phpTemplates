@@ -1,12 +1,11 @@
 <?php
 /**
- *  PHPTemplateResource CRC for mysql
- *
- * Author: proxyfabio
- * Date: 29.11.12
- *
- * @package: PHPTemplates
- * @subpackage: build
+ * @package modx
+ * @subpackage mysql
  */
-require_once (dirname(dirname(__FILE__)) . '/phptemplateresource.class.php');
-class PhpTemplateResource_mysql extends PHPTemplateResource{}
+require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/phptemplateresource.class.php');
+/**
+ * @package modx
+ * @subpackage mysql
+ */
+class phpTemplateResource_mysql extends phpTemplateResource{}

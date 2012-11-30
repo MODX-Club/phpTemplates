@@ -14,9 +14,9 @@ $tstart = $mtime;
 set_time_limit(0);
 
 /* define package */
-define('PKG_NAME','PHPTemplates');
+define('PKG_NAME','phpTemplates');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','1.0');
+define('PKG_VERSION','1.0.0');
 define('PKG_RELEASE','beta');
 
 /* define sources */
@@ -58,10 +58,25 @@ $modx->log(modX::LOG_LEVEL_INFO,'Transport Package and Namespace creation.');
 
 /* create category */
 $category= $modx->newObject('modCategory');
-$category->set('id',1);
+$category->set('id', NULL);
 $category->set('category',PKG_NAME);
 
 /* now pack in the license file, readme and setup options */
+$attr = array(
+    xPDOTransport::UNIQUE_KEY => 'category',
+    xPDOTransport::PRESERVE_KEYS => false,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::RELATED_OBJECTS => true,
+    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+        'Snippets' => array(
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UNIQUE_KEY => 'name',
+        ),
+    )
+);
+
+
 $vehicle = $builder->createVehicle($category,$attr);
 $modx->log(modX::LOG_LEVEL_INFO,'Adding resolvers to category...');
 $vehicle->resolve('file',array(
@@ -83,6 +98,7 @@ $builder->setPackageAttributes(array(
     'license' => file_get_contents($sources['docs'] . 'license.txt'),
     'readme' => file_get_contents($sources['docs'] . 'readme.txt')
 ));
+
 $modx->log(modX::LOG_LEVEL_INFO,'Added package attributes and setup options.');
 
 /* zip up package */

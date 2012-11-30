@@ -1,13 +1,12 @@
 <?php
 /**
- * Default English Lexicon Entries for Tickets
+ * Default English Lexicon Entries
  *
- * @package tickets
  * @subpackage lexicon
  */
-$_lang['phphtemplates_resource_create'] = 'Создать';
-$_lang['phphtemplates_resource_create_here'] = 'Создать здесь';
-$_lang['phphtemplates_resource'] = 'Ресурс php шаблона';
+$_lang['phptemplates_resource_create'] = 'Resource with php-template';
+$_lang['phptemplates_resource_create_here'] = 'Create resource with php-template';
+$_lang['phptemplates_resource'] = 'Resource with php-template';
 $_lang['resource'] = 'Ресурс';
 
 

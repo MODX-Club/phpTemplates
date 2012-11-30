@@ -3,8 +3,8 @@
  * Author: proxyfabio
  * Date: 29.11.12
  *
- * @package: PHPTemplates
+ * @package: phpTemplates
  * @subpackage: build
  */
 
-class PhpTemplateDataManagerController extends ResourceDataManagerController {}
+class phpTemplateDataManagerController extends ResourceDataManagerController {}

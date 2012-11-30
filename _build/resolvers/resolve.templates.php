@@ -21,10 +21,8 @@ if ($object->xpdo) {
 
             if ($modx instanceof modX) {
                 $modx->addExtensionPackage($pkgName, '[[++core_path]]components/'.$pkgName.'/model/');
-                $modx->log(1,'adding ext package');
-            }
-
-
+                $modx->log(xPDO::LOG_LEVEL_INFO, 'Adding ext package');
+            } 
             break;
 
         case xPDOTransport::ACTION_UNINSTALL:
