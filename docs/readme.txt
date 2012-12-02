@@ -1,1 +1,0 @@
-phpTemplates Extra allow use static php templates
