@@ -50,13 +50,13 @@ class phpTemplateResource extends modResource{
          * Try to precess Template
          */
         if ($baseElement->process()) {
-                $this->_output= $baseElement->_output;
+                $this->_content= $baseElement->_output;
                 $this->_processed= true;
         }
         else {
-            $this->_output= $this->getContent();
+            $this->_content= $this->getContent();
             $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',10));
-            $this->xpdo->parser->processElementTags('', $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+            $this->xpdo->parser->processElementTags('', $this->_content, false, false, '[[', ']]', array(), $maxIterations);
             $this->_processed= true;
         }
             
@@ -66,20 +66,18 @@ class phpTemplateResource extends modResource{
         if($baseElement->_static_template == true){
             
             $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',10));
-            $this->xpdo->parser->processElementTags('', $this->_output, true, false, '[[', ']]', array(), $maxIterations);
-            $this->xpdo->parser->processElementTags('', $this->_output, true, true, '[[', ']]', array(), $maxIterations);
+            $this->xpdo->parser->processElementTags('', $this->_content, true, false, '[[', ']]', array(), $maxIterations);
+            $this->xpdo->parser->processElementTags('', $this->_content, true, true, '[[', ']]', array(), $maxIterations);
 
             $this->xpdo->invokeEvent('OnWebPagePrerender');
             
-            /*
-             * printting output 
-             */
-            print $this->_output; 
+            print $this->_content; 
             
             /*
              * Empty data for minimize document cache
              */
-            $this->_output = null;
+            $this->content = null;
+            $this->_content = null;
             $this->xpdo->elementCache = null;
             $this->xpdo->sourceCache = null;
              
@@ -93,6 +91,6 @@ class phpTemplateResource extends modResource{
             exit;
         }
         
-        return $this->_output;   
+        return $this->_content;   
     }
 }
