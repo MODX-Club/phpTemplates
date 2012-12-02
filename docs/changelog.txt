@@ -1,0 +1,32 @@
+phpTemplates 1.2.1
+===========================================
+
+1. Startupscripts addition bugfix
+
+
+phpTemplates 1.2.0
+===========================================
+
+1. Resource content clearing bugfix
+
+2. Plugins envoke event bugfix
+
+
+phpTemplates 1.1.0
+===========================================
+
+1. Optimized resource cache
+
+
+phpTemplates 1.0.1
+===========================================
+
+1. Added phptemplates plugin
+
+
+phpTemplates 1.0.0
+===========================================
+
+1. Added php static templates
+
+2. Added custom resources
