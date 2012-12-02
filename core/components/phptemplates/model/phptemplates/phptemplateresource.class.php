@@ -50,13 +50,13 @@ class phpTemplateResource extends modResource{
          * Try to precess Template
          */
         if ($baseElement->process()) {
-                $this->_content= $baseElement->_output;
+                $this->_output= $baseElement->_output;
                 $this->_processed= true;
         }
         else {
-            $this->_content= $this->getContent();
+            $this->_output= $this->getContent();
             $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',10));
-            $this->xpdo->parser->processElementTags('', $this->_content, false, false, '[[', ']]', array(), $maxIterations);
+            $this->xpdo->parser->processElementTags('', $this->_output, false, false, '[[', ']]', array(), $maxIterations);
             $this->_processed= true;
         }
             
@@ -65,19 +65,44 @@ class phpTemplateResource extends modResource{
          */
         if($baseElement->_static_template == true){
             
+            
+            $this->xpdo->resource->_jscripts= $this->xpdo->jscripts;
+            $this->xpdo->resource->_sjscripts= $this->xpdo->sjscripts;
+            $this->xpdo->resource->_loadedjscripts= $this->xpdo->loadedjscripts;
+            
+            $this->xpdo->getParser();
+            
             $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',10));
-            $this->xpdo->parser->processElementTags('', $this->_content, true, false, '[[', ']]', array(), $maxIterations);
-            $this->xpdo->parser->processElementTags('', $this->_content, true, true, '[[', ']]', array(), $maxIterations);
+            $this->xpdo->parser->processElementTags('', $this->_output, true, false, '[[', ']]', array(), $maxIterations);
+            $this->xpdo->parser->processElementTags('', $this->_output, true, true, '[[', ']]', array(), $maxIterations);
+            
+            /*FIXME: only do this for HTML content ?*/
+            if ( $this->contentType == 'text/html') {
+                /* Insert Startup jscripts & CSS scripts into template - template must have a </head> tag */
+                if (($js= $this->xpdo->getRegisteredClientStartupScripts()) && (strpos($this->_output, '</head>') !== false)) {
+                    /* change to just before closing </head> */
+                    $this->_output= preg_replace("/(<\/head>)/i", $js . "\n\\1", $this->_output,1);
+                }
 
+                /* Insert jscripts & html block into template - template must have a </body> tag */
+                if ((strpos($this->_output, '</body>') !== false) && ($js= $this->xpdo->getRegisteredClientScripts())) {
+                    $this->_output= preg_replace("/(<\/body>)/i", $js . "\n\\1", $this->_output,1);
+                }
+            }
+            
+            $this->xpdo->beforeRender();
+            
             $this->xpdo->invokeEvent('OnWebPagePrerender');
             
-            print $this->_content; 
+            /*
+             * printting output 
+             */
+            print $this->_output; 
             
             /*
              * Empty data for minimize document cache
              */
-            $this->content = null;
-            $this->_content = null;
+            $this->_output = null;
             $this->xpdo->elementCache = null;
             $this->xpdo->sourceCache = null;
              
@@ -87,10 +112,11 @@ class phpTemplateResource extends modResource{
                     $this->xpdo->cacheManager->generateResource($this);
                 }
             }
+            
             $this->xpdo->invokeEvent('OnWebPageComplete');
             exit;
         }
         
-        return $this->_content;   
+        return $this->_output;   
     }
 }

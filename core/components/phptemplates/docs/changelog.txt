@@ -1,3 +1,20 @@
+<<<<<<< HEAD
+=======
+phpTemplates 1.2.1
+===========================================
+
+1. Startupscripts addition bugfix
+
+
+phpTemplates 1.2.0
+===========================================
+
+1. Resource content clearing bugfix
+
+2. Plugins envoke event bugfix
+
+
+>>>>>>> 5415f70f6742a89f0d4020f73922a8ed6c72c204
 phpTemplates 1.1.0
 ===========================================
 
