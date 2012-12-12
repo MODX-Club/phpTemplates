@@ -16,13 +16,8 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','phpTemplates');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-<<<<<<< HEAD
 define('PKG_VERSION','1.2.2');
 define('PKG_RELEASE','rc');
-=======
-define('PKG_VERSION','1.2.1');
-define('PKG_RELEASE','beta');
->>>>>>> b6e806154735b8fd2f910337e0f758d231e35b6a
 
 /* define sources */
 $root = dirname(dirname(__FILE__)).'/';
