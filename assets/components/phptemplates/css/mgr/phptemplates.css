@@ -1,3 +1,10 @@
 .icon-phptemplateresource .x-tree-node-icon {
+<<<<<<< HEAD
+	background-image: url(../../img/phptemplates_page.png) !important;
+}
+.icon-phptemplateresource.icon-folder .x-tree-node-icon {
+	background-image: url(../../img/phptemplates_folder.png) !important;
+=======
 	background-image: url(../../img/page_white_php.png) !important;
+>>>>>>> b6e806154735b8fd2f910337e0f758d231e35b6a
 }

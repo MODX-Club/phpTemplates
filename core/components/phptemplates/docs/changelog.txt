@@ -1,32 +1,34 @@
-phpTemplates 1.2.1
+phpTemplates 1.2.2-rc
 ===========================================
+1.  Switched to RC-version
 
+2.  Added folder icon
+
+
+phpTemplates 1.2.1-beta
+===========================================
 1. Startupscripts addition bugfix
 
 
-phpTemplates 1.2.0
+phpTemplates 1.2.0-beta
 ===========================================
-
 1. Resource content clearing bugfix
 
 2. Plugins envoke event bugfix
 
 
-phpTemplates 1.1.0
+phpTemplates 1.1.0-beta
 ===========================================
-
 1. Optimized resource cache
 
 
-phpTemplates 1.0.1
+phpTemplates 1.0.1-beta
 ===========================================
-
 1. Added phptemplates plugin
 
 
-phpTemplates 1.0.0
+phpTemplates 1.0.0-beta
 ===========================================
-
 1. Added php static templates
 
 2. Added custom resources

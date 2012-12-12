@@ -114,6 +114,7 @@ class phpTemplateResource extends modResource{
             }
             
             $this->xpdo->invokeEvent('OnWebPageComplete');
+            @session_write_close();
             exit;
         }
         
