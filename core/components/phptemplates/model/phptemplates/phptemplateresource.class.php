@@ -90,9 +90,64 @@ class phpTemplateResource extends modResource{
                 }
             }
             
+            
+            if (!($contentType = $this->getOne('ContentType'))) {
+                if ($this->xpdo->getDebug() === true) {
+                    $this->xpdo->log(modX::LOG_LEVEL_DEBUG, "No valid content type for RESOURCE: " . print_r($this->toArray(), true));
+                }
+                $this->xpdo->log(modX::LOG_LEVEL_FATAL, "The requested resource has no valid content type specified.");
+            }
+            
             $this->xpdo->beforeRender();
             
             $this->xpdo->invokeEvent('OnWebPagePrerender');
+            
+             
+            /* send out content-type, content-disposition, and custom headers from the content type */
+            if ($this->xpdo->getOption('set_header')) {
+                $type= $contentType->get('mime_type') ? $contentType->get('mime_type') : 'text/html';
+                $header= 'Content-Type: ' . $type;
+                if (!$contentType->get('binary')) {
+                    $charset= $this->xpdo->getOption('modx_charset',null,'UTF-8');
+                    $header .= '; charset=' . $charset;
+                }
+                header($header);
+                if (!$this->checkPreview()) {
+                    $dispositionSet= false;
+                    if ($customHeaders= $contentType->get('headers')) {
+                        foreach ($customHeaders as $headerKey => $headerString) {
+                            header($headerString);
+                            if (strpos($headerString, 'Content-Disposition:') !== false) $dispositionSet= true;
+                        }
+                    }
+                    if (!$dispositionSet && $this->xpdo->resource->get('content_dispo')) {
+                        if ($alias= array_search($this->xpdo->resourceIdentifier, $this->xpdo->aliasMap)) {
+                            $name= basename($alias);
+                        } elseif ($this->xpdo->resource->get('alias')) {
+                            $name= $this->xpdo->resource->get('alias');
+                            if ($ext= $contentType->getExtension()) {
+                                $name .= ".{$ext}";
+                            }
+                        } elseif ($name= $this->xpdo->resource->get('pagetitle')) {
+                            $name= $this->xpdo->resource->cleanAlias($name);
+                            if ($ext= $contentType->getExtension()) {
+                                $name .= ".{$ext}";
+                            }
+                        } else {
+                            $name= 'download';
+                            if ($ext= $contentType->getExtension()) {
+                                $name .= ".{$ext}";
+                            }
+                        }
+                        $header= 'Cache-Control: public';
+                        header($header);
+                        $header= 'Content-Disposition: attachment; filename=' . $name;
+                        header($header);
+                        $header= 'Vary: User-Agent';
+                        header($header);
+                    }
+                }
+            }
             
             /*
              * printting output 
