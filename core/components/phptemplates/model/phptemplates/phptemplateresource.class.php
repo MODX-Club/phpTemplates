@@ -112,41 +112,6 @@ class phpTemplateResource extends modResource{
                     $header .= '; charset=' . $charset;
                 }
                 header($header);
-                if (!$this->checkPreview()) {
-                    $dispositionSet= false;
-                    if ($customHeaders= $contentType->get('headers')) {
-                        foreach ($customHeaders as $headerKey => $headerString) {
-                            header($headerString);
-                            if (strpos($headerString, 'Content-Disposition:') !== false) $dispositionSet= true;
-                        }
-                    }
-                    if (!$dispositionSet && $this->xpdo->resource->get('content_dispo')) {
-                        if ($alias= array_search($this->xpdo->resourceIdentifier, $this->xpdo->aliasMap)) {
-                            $name= basename($alias);
-                        } elseif ($this->xpdo->resource->get('alias')) {
-                            $name= $this->xpdo->resource->get('alias');
-                            if ($ext= $contentType->getExtension()) {
-                                $name .= ".{$ext}";
-                            }
-                        } elseif ($name= $this->xpdo->resource->get('pagetitle')) {
-                            $name= $this->xpdo->resource->cleanAlias($name);
-                            if ($ext= $contentType->getExtension()) {
-                                $name .= ".{$ext}";
-                            }
-                        } else {
-                            $name= 'download';
-                            if ($ext= $contentType->getExtension()) {
-                                $name .= ".{$ext}";
-                            }
-                        }
-                        $header= 'Cache-Control: public';
-                        header($header);
-                        $header= 'Content-Disposition: attachment; filename=' . $name;
-                        header($header);
-                        $header= 'Vary: User-Agent';
-                        header($header);
-                    }
-                }
             }
             
             /*
