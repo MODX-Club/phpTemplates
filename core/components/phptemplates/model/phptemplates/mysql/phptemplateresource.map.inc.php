@@ -9,6 +9,7 @@ $xpdo_meta_map['phpTemplateResource']= array (
   'extends' => 'modResource',
   'fields' => 
   array (
+      'class_key' => 'phpTemplateResource',
   ),
   'fieldMeta' => 
   array (

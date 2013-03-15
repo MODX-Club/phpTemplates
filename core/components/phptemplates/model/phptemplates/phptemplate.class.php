@@ -9,23 +9,24 @@
  * @subpackage: build
  */
 
-require_once MODX_CORE_PATH.'model/modx/modtemplate.class.php';
+$this->loadClass('modTemplate');
 
 class phpTemplate extends modTemplate{
-    public $_static_template = false;
-    
-    public function process($properties= null, $content= null){
-        if($this->static != '1'){
+    public function process($properties = null, $content = null) {
+        $this->_process($properties, $content);
+        if (!$this->_processed) {
             return parent::process($properties, $content);
         }
-        
-        $this->_static_template = true;
-        
-        $modx = & $this->xpdo;
-        ob_start();
-            @include $this->getSourceFile(); 
-            $this->_output = ob_get_contents();
-        ob_end_clean(); 
         return $this->_output;
+    }
+     
+    protected function _process($properties = null, $content = null) {
+        if(!$this->isStatic()){return;}
+        if(!$controller = $this->getSourceFile()){return ;}
+        $modx = & $this->xpdo;
+        $resource = & $this->xpdo->resource;
+        $this->_output = require_once $controller;
+        $this->_processed = true;
+        return ;
     }
 }
