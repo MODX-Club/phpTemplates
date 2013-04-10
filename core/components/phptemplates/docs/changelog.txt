@@ -1,3 +1,9 @@
+phpTemplates 1.4.1-rc
+===========================================
+1.  [#1] Added phpTemplate::getProperties()
+2.  [#3] Bugfix Overview data controller
+
+
 phpTemplates 1.4.0-rc
 ===========================================
 1.  phpTemplate and phpTemplateResource code refactoring.

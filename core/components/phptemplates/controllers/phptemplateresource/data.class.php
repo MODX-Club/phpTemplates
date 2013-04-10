@@ -7,4 +7,4 @@
  * @subpackage: build
  */
 
-class phpTemplateDataManagerController extends ResourceDataManagerController {}
+class phpTemplateResourceDataManagerController extends ResourceDataManagerController {}
