@@ -24,7 +24,7 @@ class phpTemplate extends modTemplate{
         if(!$this->isStatic()){return;}
         if(!$controller = $this->getSourceFile()){return ;}
         $modx = & $this->xpdo;
-        $this->getProperties();
+        $this->getProperties($properties);
         $resource = & $this->xpdo->resource;
         $this->_output = require_once $controller;
         $this->_processed = true;

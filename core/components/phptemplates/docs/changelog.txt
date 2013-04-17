@@ -1,3 +1,13 @@
+phpTemplates 1.5.0-beta
+===========================================
+1.  Added $properties in call phpTemplate::getProperties()
+2.  Overwrited $modx->map['modResource']['aggregates']['Template']
+    with phpTemplate. Now modResource::getOne('Template') return phpTemplate
+3.  Added plugin on OnLoadWebDocument event. If template have property 
+    phptemplates.non-cached and phptemplates.non-cached == true, will be called
+    $modx->resource->setProcessed(false) and Template will processed on any request.
+    It`s useful for Smarty and other template systems.
+
 phpTemplates 1.4.1-rc
 ===========================================
 1.  [#1] Added phpTemplate::getProperties()

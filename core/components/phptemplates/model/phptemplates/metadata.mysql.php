@@ -14,3 +14,11 @@ $xpdo_meta_map = array (
         0 => 'phpTemplateResource',
     ),
 );
+
+$this->map['modResource']['aggregates']['Template'] = array(
+    'class' => 'phpTemplate',
+    'local' => 'template',
+    'foreign'   => 'id',
+    'cardinality' => 'one',
+    'owner' => 'foreign',
+);
