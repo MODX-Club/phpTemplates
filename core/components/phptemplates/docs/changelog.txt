@@ -1,3 +1,7 @@
+phpTemplates 1.5.1-beta
+===========================================
+1.  Minor bugfix
+
 phpTemplates 1.5.0-beta
 ===========================================
 1.  Added $properties in call phpTemplate::getProperties()

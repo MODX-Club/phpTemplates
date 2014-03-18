@@ -27,6 +27,15 @@ class phpTemplate extends modTemplate{
         $this->getProperties($properties);
         $resource = & $this->xpdo->resource;
         $this->_output = require_once $controller;
+        if (is_string($this->_output) && !empty($this->_output)) {
+            /* turn the processed properties into placeholders */
+            $this->xpdo->toPlaceholders($this->_properties, '', '.', true);
+
+            /* collect element tags in the content and process them */
+            $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
+            $this->xpdo->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+        }
+        $this->filterOutput();
         $this->_processed = true;
         return ;
     }
