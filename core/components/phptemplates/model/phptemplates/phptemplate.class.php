@@ -26,7 +26,7 @@ class phpTemplate extends modTemplate{
         $modx = & $this->xpdo;
         $this->getProperties($properties);
         $resource = & $this->xpdo->resource;
-        $this->_output = require_once $controller;
+        $this->_output = require $controller;
         if (is_string($this->_output) && !empty($this->_output)) {
             /* turn the processed properties into placeholders */
             $this->xpdo->toPlaceholders($this->_properties, '', '.', true);

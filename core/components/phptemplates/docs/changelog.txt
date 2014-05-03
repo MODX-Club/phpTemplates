@@ -1,3 +1,7 @@
+phpTemplates 1.5.2-beta
+===========================================
+1.  change require_once to require in phpTemplate
+
 phpTemplates 1.5.1-beta
 ===========================================
 1.  Minor bugfix
